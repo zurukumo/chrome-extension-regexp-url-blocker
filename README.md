@@ -6,7 +6,7 @@ A Chrome extension to block websites using regular expressions.
 
 # Privacy Policy
 
-**Last Updated: 2024-07-08**
+**Last Updated: 2024-07-25**
 
 Thank you for using our Chrome extension. Your privacy is important to us. This Privacy Policy explains what information we collect, how we use it, and your rights regarding your information.
 
@@ -15,11 +15,10 @@ Thank you for using our Chrome extension. Your privacy is important to us. This 
 Our Chrome extension collects and stores the following information:
 
 - **URL RegExps:** The extension records URL RegExps that you inputted. This information is stored locally on your device and is not transmitted to any external servers.
-- **Working Status:** The extension records working status that you inputted. This information is stored locally on your device and is not transmitted to any external servers.
 
 ## Usage Data
 
-We do not collect any other usage data or analytics regarding your use of the extension. Your interactions with the extension, apart from URL RegExps and working status, are not monitored, recorded, or shared.
+We do not collect any other usage data or analytics regarding your use of the extension. Your interactions with the extension, apart from URL RegExps, are not monitored, recorded, or shared.
 
 ## Permissions
 
@@ -27,7 +26,7 @@ Our extension requires certain permissions to function correctly, including acce
 
 ## Data Security
 
-URL RegExps and working status are stored locally on your device. We do not store or transmit this information elsewhere, ensuring that your data remains secure and private.
+URL RegExps are stored locally on your device. We do not store or transmit this information elsewhere, ensuring that your data remains secure and private.
 
 ## Third-Party Services
 
