@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react';
 
 const Popup: React.FC = () => {
-  const [status, setStatus] = useState(true);
+  const [until, setUntil] = useState<Date>(new Date('1900-01-01T00:00:00Z'));
 
-  // statusの初期値を取得
+  const hours = String(until.getHours()).padStart(2, '0'); // 時間を取得し、2桁に整形
+  const minutes = String(until.getMinutes()).padStart(2, '0'); // 分を取得し、2桁に整形
+  const untilString = `${hours}:${minutes}`;
+
+  // untilの初期値を取得
   useEffect(() => {
-    chrome.storage.local.get(['status'], (data) => {
-      if (typeof data.status === 'boolean') setStatus(data.status);
+    chrome.storage.local.get(['until'], (data) => {
+      if (data.until) setUntil(new Date(data.until));
     });
   }, []);
 
-  const turnOn = async () => {
-    chrome.storage.local.set({ status: true }, () => setStatus(true));
-  };
-
-  const turnOff = async () => {
-    chrome.storage.local.set({ status: false }, () => setStatus(false));
+  const disable = async () => {
+    const newUntil = new Date(Date.now() + 60 * 1000);
+    chrome.storage.local.set({ until: newUntil.toString() }, () =>
+      setUntil(newUntil)
+    );
   };
 
   return (
@@ -24,17 +27,17 @@ const Popup: React.FC = () => {
       <div className="flex flex-col items-center gap-y-2">
         <p className="text-base">
           Current Status:{' '}
-          {status ? (
-            <span className="text-green-600">Working</span>
+          {until < new Date() ? (
+            <span className="text-green-600">Active</span>
           ) : (
-            <span className="text-red-600">Stopped</span>
+            <span className="text-red-600">Disabled until {untilString}</span>
           )}
         </p>
         <div
-          onClick={status ? turnOff : turnOn}
+          onClick={disable}
           className="block h-10 w-40 cursor-pointer rounded border border-amber-500 bg-amber-400 text-center leading-10 text-white hover:border-amber-600 hover:bg-amber-500"
         >
-          Turn {status ? 'Off' : 'On'}
+          Disable for a minute
         </div>
       </div>
       <a
