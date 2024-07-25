@@ -1,6 +1,6 @@
 {
   "name": "chrome-extension-regexp-url-blocker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Chrome extension to block websites using regular expressions.",
   "license": "MIT",
   "repository": {
