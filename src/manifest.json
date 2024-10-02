@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "RegExp URL Filter",
+  "name": "RegExp URL Blocker",
   "description": "A Chrome extension to block websites using regular expressions.",
   "options_page": "options.html",
   "action": {

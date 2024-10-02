@@ -29,7 +29,7 @@ const Popup: React.FC = () => {
   };
   return (
     <div className="flex w-[300px] flex-col items-center gap-y-10 bg-slate-100 py-6">
-      <h1 className="text-2xl font-bold">RegExp URL Filter</h1>
+      <h1 className="text-2xl font-bold">RegExp URL Blocker</h1>
       <div className="flex flex-col items-center gap-y-2">
         <p className="text-base">
           {diff <= 0 ? (
