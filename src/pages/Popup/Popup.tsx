@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const Popup: React.FC = () => {
   const [until, setUntil] = useState<Date>(new Date('1900-01-01T00:00:00Z'));
-
-  const hours = String(until.getHours()).padStart(2, '0'); // 時間を取得し、2桁に整形
-  const minutes = String(until.getMinutes()).padStart(2, '0'); // 分を取得し、2桁に整形
-  const untilString = `${hours}:${minutes}`;
+  const [diff, setDiff] = useState<number>(0);
 
   // untilの初期値を取得
   useEffect(() => {
@@ -14,23 +11,31 @@ const Popup: React.FC = () => {
     });
   }, []);
 
+  // カウントダウンタイマー
+  useEffect(() => {
+    setDiff(Math.trunc((until.getTime() - new Date().getTime()) / 1000));
+    const intervalId = window.setInterval(() => {
+      setDiff(Math.trunc((until.getTime() - new Date().getTime()) / 1000));
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [until]);
+
   const disable = async () => {
     const newUntil = new Date(Date.now() + 60 * 1000);
     chrome.storage.local.set({ until: newUntil.toString() }, () =>
       setUntil(newUntil)
     );
   };
-
   return (
     <div className="flex w-[300px] flex-col items-center gap-y-10 bg-slate-100 py-6">
       <h1 className="text-2xl font-bold">RegExp URL Filter</h1>
       <div className="flex flex-col items-center gap-y-2">
         <p className="text-base">
-          Current Status:{' '}
-          {until < new Date() ? (
+          {diff <= 0 ? (
             <span className="text-green-600">Active</span>
           ) : (
-            <span className="text-red-600">Disabled until {untilString}</span>
+            <span className="text-red-600">Disabled in {diff} seconds</span>
           )}
         </p>
         <div
